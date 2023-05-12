@@ -1,0 +1,340 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"18 ./generador.h
+[; ;./generador.h: 18: typedef struct generador {
+[s S1 `uc 1 `uc 1 `uc 1 `i 1 `i 1 `i 1 `uc 1 ]
+[n S1 generador entrada salida frecuencia cont periodo personal error ]
+"3 generador.c
+[; ;generador.c: 3: int coseno[100] = {
+[v _coseno `i ~T0 @X0 -> 100 `i e ]
+[i _coseno
+:U ..
+-> 1023 `i
+-> 1021 `i
+-> 1015 `i
+-> 1005 `i
+-> 991 `i
+-> 973 `i
+-> 951 `i
+-> 926 `i
+-> 896 `i
+-> 864 `i
+-> 828 `i
+-> 788 `i
+-> 746 `i
+-> 700 `i
+-> 652 `i
+-> 601 `i
+-> 548 `i
+-> 493 `i
+-> 436 `i
+-> 377 `i
+-> 316 `i
+-> 254 `i
+-> 192 `i
+-> 128 `i
+-> 64 `i
+-> 0 `i
+-U -> 64 `i
+-U -> 128 `i
+-U -> 192 `i
+-U -> 254 `i
+-U -> 316 `i
+-U -> 377 `i
+-U -> 436 `i
+-U -> 493 `i
+-U -> 548 `i
+-U -> 601 `i
+-U -> 652 `i
+-U -> 700 `i
+-U -> 746 `i
+-U -> 788 `i
+-U -> 828 `i
+-U -> 864 `i
+-U -> 896 `i
+-U -> 926 `i
+-U -> 951 `i
+-U -> 973 `i
+-U -> 991 `i
+-U -> 1005 `i
+-U -> 1015 `i
+-U -> 1021 `i
+-U -> 1023 `i
+-U -> 1021 `i
+-U -> 1015 `i
+-U -> 1005 `i
+-U -> 991 `i
+-U -> 973 `i
+-U -> 951 `i
+-U -> 926 `i
+-U -> 896 `i
+-U -> 864 `i
+-U -> 828 `i
+-U -> 788 `i
+-U -> 746 `i
+-U -> 700 `i
+-U -> 652 `i
+-U -> 601 `i
+-U -> 548 `i
+-U -> 493 `i
+-U -> 436 `i
+-U -> 377 `i
+-U -> 316 `i
+-U -> 254 `i
+-U -> 192 `i
+-U -> 128 `i
+-U -> 64 `i
+-U -> 0 `i
+-> 64 `i
+-> 128 `i
+-> 192 `i
+-> 254 `i
+-> 316 `i
+-> 377 `i
+-> 436 `i
+-> 493 `i
+-> 548 `i
+-> 601 `i
+-> 652 `i
+-> 700 `i
+-> 746 `i
+-> 788 `i
+-> 828 `i
+-> 864 `i
+-> 896 `i
+-> 926 `i
+-> 951 `i
+-> 973 `i
+-> 991 `i
+-> 1005 `i
+-> 1015 `i
+-> 1021 `i
+..
+]
+"19
+[; ;generador.c: 19: void SenalPersonalizada(generador* gen,int personal)
+[v _SenalPersonalizada `(v ~T0 @X0 1 ef2`*S1`i ]
+"20
+[; ;generador.c: 20: {
+{
+[e :U _SenalPersonalizada ]
+"19
+[; ;generador.c: 19: void SenalPersonalizada(generador* gen,int personal)
+[v _gen `*S1 ~T0 @X0 1 r1 ]
+[v _personal `i ~T0 @X0 1 r2 ]
+"20
+[; ;generador.c: 20: {
+[f ]
+"21
+[; ;generador.c: 21:   gen->personal= (gen->entrada==16)? gen->personal+personal : personal;
+[e = . *U _gen 5 ? == -> . *U _gen 0 `i -> 16 `i : + . *U _gen 5 _personal _personal ]
+"22
+[; ;generador.c: 22: }
+[e :UE 2 ]
+}
+"24
+[; ;generador.c: 24: int generadorSenal(generador* gen)
+[v _generadorSenal `(i ~T0 @X0 1 ef1`*S1 ]
+"25
+[; ;generador.c: 25: {
+{
+[e :U _generadorSenal ]
+"24
+[; ;generador.c: 24: int generadorSenal(generador* gen)
+[v _gen `*S1 ~T0 @X0 1 r1 ]
+"25
+[; ;generador.c: 25: {
+[f ]
+"26
+[; ;generador.c: 26:   int walk = -1;
+[v _walk `i ~T0 @X0 1 a ]
+[e = _walk -U -> 1 `i ]
+"27
+[; ;generador.c: 27:   switch (gen->entrada)
+[e $U 5  ]
+"28
+[; ;generador.c: 28:   {
+{
+"29
+[; ;generador.c: 29:     case 2:
+[e :U 6 ]
+"30
+[; ;generador.c: 30:       if (gen->cont > gen->periodo)
+[e $ ! > . *U _gen 3 . *U _gen 4 7  ]
+"31
+[; ;generador.c: 31:       {
+{
+"32
+[; ;generador.c: 32:         gen->cont = 0;
+[e = . *U _gen 3 -> 0 `i ]
+"33
+[; ;generador.c: 33:         if (walk)
+[e $ ! != _walk -> 0 `i 8  ]
+"34
+[; ;generador.c: 34:           walk = 0;
+[e = _walk -> 0 `i ]
+[e $U 9  ]
+"35
+[; ;generador.c: 35:         else if (gen->salida == 4)
+[e :U 8 ]
+[e $ ! == -> . *U _gen 1 `i -> 4 `i 10  ]
+"36
+[; ;generador.c: 36:           walk = 1;
+[e = _walk -> 1 `i ]
+[e $U 11  ]
+"37
+[; ;generador.c: 37:         else
+[e :U 10 ]
+"38
+[; ;generador.c: 38:           walk = 256;
+[e = _walk -> 256 `i ]
+[e :U 11 ]
+[e :U 9 ]
+"39
+[; ;generador.c: 39:       }
+}
+[e :U 7 ]
+"40
+[; ;generador.c: 40:       gen->cont++;
+[e ++ . *U _gen 3 -> 1 `i ]
+"41
+[; ;generador.c: 41:       break;
+[e $U 4  ]
+"42
+[; ;generador.c: 42:     case 8:
+[e :U 12 ]
+"43
+[; ;generador.c: 43:     case 16:
+[e :U 13 ]
+"44
+[; ;generador.c: 44:       walk =gen->personal;
+[e = _walk . *U _gen 5 ]
+"45
+[; ;generador.c: 45:       break;
+[e $U 4  ]
+"46
+[; ;generador.c: 46:     case 1:
+[e :U 14 ]
+"47
+[; ;generador.c: 47:       if (gen->cont > gen->periodo)
+[e $ ! > . *U _gen 3 . *U _gen 4 15  ]
+"48
+[; ;generador.c: 48:       {
+{
+"49
+[; ;generador.c: 49:         gen->cont = 0;
+[e = . *U _gen 3 -> 0 `i ]
+"50
+[; ;generador.c: 50:         if (gen->salida == 4)
+[e $ ! == -> . *U _gen 1 `i -> 4 `i 16  ]
+"51
+[; ;generador.c: 51:           walk = 1;
+[e = _walk -> 1 `i ]
+[e $U 17  ]
+"52
+[; ;generador.c: 52:         else
+[e :U 16 ]
+"53
+[; ;generador.c: 53:           walk = 256;
+[e = _walk -> 256 `i ]
+[e :U 17 ]
+"54
+[; ;generador.c: 54:       }
+}
+[e $U 18  ]
+"55
+[; ;generador.c: 55:       else {
+[e :U 15 ]
+{
+"56
+[; ;generador.c: 56:         walk = 0;
+[e = _walk -> 0 `i ]
+"57
+[; ;generador.c: 57:       }
+}
+[e :U 18 ]
+"58
+[; ;generador.c: 58:       gen->cont++;
+[e ++ . *U _gen 3 -> 1 `i ]
+"59
+[; ;generador.c: 59:       break;
+[e $U 4  ]
+"60
+[; ;generador.c: 60:     case 4:
+[e :U 19 ]
+"61
+[; ;generador.c: 61:       walk = coseno[gen->cont];
+[e = _walk *U + &U _coseno * -> -> . *U _gen 3 `ui `ux -> -> # *U &U _coseno `ui `ux ]
+"62
+[; ;generador.c: 62:       gen->cont += gen->frecuencia;
+[e =+ . *U _gen 3 -> . *U _gen 2 `i ]
+"63
+[; ;generador.c: 63:       gen->cont = (gen->cont >= 100) ? 0 : gen->cont ;
+[e = . *U _gen 3 ? >= . *U _gen 3 -> 100 `i : -> 0 `i . *U _gen 3 ]
+"66
+[; ;generador.c: 66:     default:
+[e :U 20 ]
+"67
+[; ;generador.c: 67:       gen->error = 1;
+[e = . *U _gen 6 -> -> 1 `i `uc ]
+"68
+[; ;generador.c: 68:   }
+}
+[e $U 4  ]
+[e :U 5 ]
+[e [\ -> . *U _gen 0 `i , $ -> 2 `i 6
+ , $ -> 8 `i 12
+ , $ -> 16 `i 13
+ , $ -> 1 `i 14
+ , $ -> 4 `i 19
+ 20 ]
+[e :U 4 ]
+"69
+[; ;generador.c: 69:   return walk;
+[e ) _walk ]
+[e $UE 3  ]
+"70
+[; ;generador.c: 70: }
+[e :UE 3 ]
+}
+"72
+[; ;generador.c: 72: void inicializarGenerador(generador* gen, char entrada, char salida, int periodo, char frecuencia)
+[v _inicializarGenerador `(v ~T0 @X0 1 ef5`*S1`uc`uc`i`uc ]
+"73
+[; ;generador.c: 73: {
+{
+[e :U _inicializarGenerador ]
+"72
+[; ;generador.c: 72: void inicializarGenerador(generador* gen, char entrada, char salida, int periodo, char frecuencia)
+[v _gen `*S1 ~T0 @X0 1 r1 ]
+[v _entrada `uc ~T0 @X0 1 r2 ]
+[v _salida `uc ~T0 @X0 1 r3 ]
+[v _periodo `i ~T0 @X0 1 r4 ]
+[v _frecuencia `uc ~T0 @X0 1 r5 ]
+"73
+[; ;generador.c: 73: {
+[f ]
+"74
+[; ;generador.c: 74:   gen->entrada = entrada;
+[e = . *U _gen 0 _entrada ]
+"75
+[; ;generador.c: 75:   gen->salida = salida;
+[e = . *U _gen 1 _salida ]
+"76
+[; ;generador.c: 76:   gen->periodo = periodo;
+[e = . *U _gen 4 _periodo ]
+"77
+[; ;generador.c: 77:   gen->personal=-1;
+[e = . *U _gen 5 -U -> 1 `i ]
+"78
+[; ;generador.c: 78:   gen->frecuencia = frecuencia;
+[e = . *U _gen 2 _frecuencia ]
+"79
+[; ;generador.c: 79:   gen->cont = 0;
+[e = . *U _gen 3 -> 0 `i ]
+"80
+[; ;generador.c: 80:   gen->error = 0;
+[e = . *U _gen 6 -> -> 0 `i `uc ]
+"81
+[; ;generador.c: 81: }
+[e :UE 21 ]
+}
